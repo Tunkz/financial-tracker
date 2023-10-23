@@ -232,13 +232,12 @@ public class FinancialTracker {
         // This method should display a table of all payments in the `transactions` ArrayList.
         // The table should have columns for date, time, vendor, and amount.
         ArrayList<Transaction> found = new ArrayList<>();
-        for (Transaction transaction : transactions){
+        for (Transaction transaction : transactions) {
 
-            if ( transaction.getAmount() > 0){
+            if (transaction.getAmount() > 0) {
                 System.out.println("Error: no payments found!");
-            }
-            else {
-                for (Transaction transaction1 : found){
+            } else {
+                for (Transaction transaction1 : found) {
                     System.out.println(transaction1);
                 }
             }
@@ -263,19 +262,37 @@ public class FinancialTracker {
                 case "1":
                     // Generate a report for all transactions within the current month,
                     // including the date, vendor, and amount for each transaction.
+                    LocalDate thisMonth = LocalDate.now();
+                    System.out.println("Displaying all transactions for this month " + thisMonth.getMonth() + "...");
+                    filterTransactionsByDate(thisMonth.withDayOfMonth(1), thisMonth);
+                    break;
                 case "2":
                     // Generate a report for all transactions within the previous month,
                     // including the date, vendor, and amount for each transaction.
+                    LocalDate lastMonth = LocalDate.now().minusMonths(1);
+                    System.out.println("Displaying all transactions for the prvious month " + lastMonth.getMonth() + "...");
+                    filterTransactionsByDate(lastMonth.withDayOfMonth(1), lastMonth.withDayOfMonth(lastMonth.lengthOfMonth()));
+                    break;
                 case "3":
                     // Generate a report for all transactions within the current year,
                     // including the date, vendor, and amount for each transaction.
-
+                    LocalDate thisYear = LocalDate.now();
+                    System.out.println("Displaying all transactions for the year of " +  thisYear.getYear()+ "so far...");
+                    filterTransactionsByDate(thisYear.withDayOfYear(1),thisYear);
+                    break;
                 case "4":
                     // Generate a report for all transactions within the previous year,
                     // including the date, vendor, and amount for each transaction.
+                    LocalDate lastYear = LocalDate.now().minusYears(1);
+                    System.out.println("Displaying all transactions for the year of " + lastYear.getYear()+ "...");
+                    filterTransactionsByDate(lastYear.withMonth(1).withDayOfMonth(31),lastYear.withMonth(12).withDayOfMonth(31));
+                    break;
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, vendor, and amount for each transaction.
+                    System.out.println("PLease type the name of the vendor you would like to check for: ");
+                    String vendorName = scanner.nextLine().trim();
+                    filterTransactionsByVendor(vendorName);
                 case "0":
                     running = false;
                 default:

@@ -24,7 +24,7 @@ public class FinancialTracker {
 
         while (running) {
             // Used some ASCII to make the intro look somehow fancy
-            System.out.println( colors.ANSI_GREEN + """
+            System.out.println(colors.ANSI_GREEN + """
                     ┌─────────────────────────────────────┐
                     │                                     │
                     │      welcome to transaction app     │
@@ -35,7 +35,7 @@ public class FinancialTracker {
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger" + colors.ANSI_RESET);
-            System.out.println( colors.ANSI_RED+ "X) Exit" + colors.ANSI_RESET);
+            System.out.println(colors.ANSI_RED + "X) Exit" + colors.ANSI_RESET);
 
             String input = scanner.nextLine().trim();
 
@@ -84,8 +84,8 @@ public class FinancialTracker {
                 transactions.add(transaction);
                 try {
                     // added the Thread.sleep method so when code is being processed it takes time and it just doesn't bump in
-                    Thread.sleep(1200);
-                    System.out.println((transaction.getAmount()>0?colors.ANSI_GREEN:colors.ANSI_RED )+ transaction + colors.ANSI_RESET);
+                    Thread.sleep(1);
+                    System.out.println((transaction.getAmount() > 0 ? colors.ANSI_GREEN : colors.ANSI_RED) + transaction + colors.ANSI_RESET);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -112,17 +112,17 @@ public class FinancialTracker {
             input = scanner.nextLine();
             LocalTime time = LocalTime.parse(input, TIME_FORMATTER);
 
-            System.out.println( colors.ANSI_GREEN + "Please add description" + colors.ANSI_RESET);
+            System.out.println(colors.ANSI_GREEN + "Please add description" + colors.ANSI_RESET);
             String description = scanner.nextLine();
 
-            System.out.println("Please enter the name of the vendor: ");
+            System.out.println(colors.ANSI_GREEN + "Please enter the name of the vendor: " + colors.ANSI_RESET);
             String vendor = scanner.nextLine();
 
-            System.out.println("Please enter the amount of the deposit: ");
+            System.out.println(colors.ANSI_GREEN + "Please enter the amount of the deposit: " + colors.ANSI_RESET);
             double depositAmount = scanner.nextDouble();
             scanner.nextLine();
             if (depositAmount < 0) {
-                System.out.println("Deposit can't be a negative number. Deposit can only be processed starting from $1");
+                System.out.println(colors.ANSI_RED + "Deposit can't be a negative number. Deposit can only be processed starting from $1" + colors.ANSI_RESET);
                 depositAmount = 1;
             }
             Transaction payment = new Transaction(date, time, description, vendor, depositAmount * -1);
@@ -130,11 +130,11 @@ public class FinancialTracker {
             bufferedWriter.write(date + "|" + time + "|" + description + "|" + vendor + "|" + depositAmount + "\n");
             bufferedWriter.close();
         } catch (DateTimeParseException e) {
-            System.out.println("Error: Could not parse date/time!");
+            System.out.println(colors.ANSI_RED + "Error: Could not parse date/time!" + colors.ANSI_RESET);
         } catch (IOException e) {
-            System.out.println("Error: Could not instantiate writer!");
+            System.out.println(colors.ANSI_RED + "Error: Could not instantiate writer!" + colors.ANSI_RESET);
         } catch (Exception e) {
-            System.out.println("Error: please try again!");
+            System.out.println(colors.ANSI_RED + "Error: please try again!" + colors.ANSI_RESET);
         }
     }
 
@@ -143,25 +143,25 @@ public class FinancialTracker {
 
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
-            System.out.println("Please add the date of the payment in this format: (yyyy-mm-dd) ");
+            System.out.println(colors.ANSI_GREEN + "Please add the date of the payment in this format: (yyyy-mm-dd) " + colors.ANSI_RESET);
             String input = scanner.nextLine();
             LocalDate date = LocalDate.parse(input, DATE_FORMATTER);
 
-            System.out.println("Please add the time of the payment in this format: (hh:mm:ss)");
+            System.out.println( colors.ANSI_GREEN + "Please add the time of the payment in this format: (hh:mm:ss)" + colors.ANSI_RESET);
             input = scanner.nextLine();
             LocalTime time = LocalTime.parse(input, TIME_FORMATTER);
 
-            System.out.println("Please add description");
+            System.out.println(colors.ANSI_GREEN +"Please add description" + colors.ANSI_RESET);
             String description = scanner.nextLine();
 
-            System.out.println("Please enter the name of the vendor: ");
+            System.out.println(colors.ANSI_GREEN +"Please enter the name of the vendor: " + colors.ANSI_RESET);
             String vendor = scanner.nextLine();
 
-            System.out.println("Please enter amount of payment");
+            System.out.println(colors.ANSI_GREEN +"Please enter amount of payment" + colors.ANSI_RESET);
             double paymentAmount = scanner.nextDouble();
             scanner.nextLine();
             if (paymentAmount < 0) {
-                System.out.println("Error: payment can't be a positive number. Payment can only be processed starting from $1");
+                System.out.println(colors.ANSI_RED + "Error: payment can't be a positive number. Payment can only be processed starting from $1" + colors.ANSI_RESET);
                 paymentAmount = 1;
             }
             Transaction payment = new Transaction(date, time, description, vendor, +paymentAmount < 0 ? paymentAmount : paymentAmount * -1);
@@ -170,11 +170,11 @@ public class FinancialTracker {
             bufferedWriter.close();
             //Found an error
         } catch (DateTimeParseException e) {
-            System.out.println("Error could not parse date/time!");
+            System.out.println(colors.ANSI_RED +"Error could not parse date/time!"+colors.ANSI_RESET);
         } catch (IOException e) {
-            System.out.println("Error: Unspecified issue with adding deposit! Check formatting if inputs!");
+            System.out.println(colors.ANSI_RED +"Error: Unspecified issue with adding deposit! Check formatting if inputs!"+colors.ANSI_RESET);
         } catch (Exception e) {
-            System.out.println("Error: Unspecified issue with adding deposit! Check formatting of inputs!");
+            System.out.println(colors.ANSI_RED +"Error: Unspecified issue with adding deposit! Check formatting of inputs!"+colors.ANSI_RESET);
         }
 
     }
@@ -182,19 +182,19 @@ public class FinancialTracker {
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.println("Ledger");
+            System.out.println(colors.ANSI_GREEN + "Ledger");
             System.out.println("""
                     ┌─────────────────────────────────────┐
                     │                                     │
                     │      welcome to the ledger menu     │
                     │                                     │
                     └─────────────────────────────────────┘""");
-            System.out.println("Choose an option:");
+            System.out.println( "Choose an option:");
             System.out.println("A) All");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
             System.out.println("R) Reports");
-            System.out.println("H) Home");
+            System.out.println("H) Home" +colors.ANSI_RESET);
 
             String input = scanner.nextLine().trim();
 
@@ -214,7 +214,7 @@ public class FinancialTracker {
                 case "H":
                     running = false;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println(colors.ANSI_RED +"Invalid option " +colors.ANSI_RESET);
                     break;
             }
         }
@@ -232,35 +232,33 @@ public class FinancialTracker {
     private static void displayDeposits() {
 
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() > 0) {
-                System.out.println(transaction);
+                System.out.println((transaction.getAmount() > 0 ? colors.ANSI_GREEN : colors.ANSI_RED) + transaction + colors.ANSI_RESET);
             }
         }
-    }
+
 
     // This time i just displayed the payments that are < than 0 ( all numbers will be -)
     private static void displayPayments() {
 
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() < 0) {
-                System.out.println(transaction);
+            System.out.println((transaction.getAmount() < 0 ? colors.ANSI_GREEN : colors.ANSI_RED) + transaction + colors.ANSI_RESET);
             }
         }
 
-    }
+
 
 
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.println("Reports");
+            System.out.println(colors.ANSI_GREEN +"Reports");
             System.out.println("Choose an option:");
             System.out.println("1) Month To Date");
             System.out.println("2) Previous Month");
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
-            System.out.println("0) Back");
+            System.out.println("0) Back" +colors.ANSI_RESET);
 
             String input = scanner.nextLine().trim();
             // Added the "filter" method to make my options broad and not narrow
@@ -268,37 +266,37 @@ public class FinancialTracker {
                 case "1":
 
                     LocalDate thisMonth = LocalDate.now();
-                    System.out.println("Displaying all transactions for this month:... " + thisMonth.getMonth());
+                    System.out.println(colors.ANSI_GREEN +"Displaying all transactions for this month:... "+colors.ANSI_RESET + thisMonth.getMonth());
                     filterTransactionsByDate(thisMonth.withDayOfMonth(1), thisMonth);
                     break;
                 case "2":
 
                     LocalDate lastMonth = LocalDate.now().minusMonths(1);
-                    System.out.println("Displaying all transactions for the previous month:... " + lastMonth.getMonth());
+                    System.out.println(colors.ANSI_GREEN +"Displaying all transactions for the previous month:... " +colors.ANSI_RESET+ lastMonth.getMonth());
                     filterTransactionsByDate(lastMonth.withDayOfMonth(1), lastMonth.withDayOfMonth(lastMonth.lengthOfMonth()));
                     break;
                 case "3":
 
                     LocalDate thisYear = LocalDate.now();
-                    System.out.println("Displaying all transactions for the current year:... " + thisYear.getYear());
+                    System.out.println(colors.ANSI_GREEN +"Displaying all transactions for the current year:... "+colors.ANSI_RESET + thisYear.getYear());
                     filterTransactionsByDate(thisYear.withDayOfYear(1), thisYear);
                     break;
                 case "4":
 
                     LocalDate lastYear = LocalDate.now().minusYears(1);
-                    System.out.println("Displaying all transactions for last year:... " + lastYear.getYear());
+                    System.out.println(colors.ANSI_GREEN +"Displaying all transactions for last year:... "+colors.ANSI_RESET + lastYear.getYear());
                     filterTransactionsByDate(lastYear.withMonth(1).withDayOfMonth(1), lastYear.withMonth(12).withDayOfMonth(31));
                     // found an error look into it
                     break;
                 case "5":
 
-                    System.out.println("PLease type the name of the vendor you would like to check for: ");
+                    System.out.println(colors.ANSI_GREEN +"PLease type the name of the vendor you would like to check for: "+colors.ANSI_RESET);
                     String vendorName = scanner.nextLine();
                     filterTransactionsByVendor(vendorName);
                 case "0":
                     running = false;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println(colors.ANSI_RED +"Invalid option"+colors.ANSI_RESET);
                     break;
             }
         }
@@ -315,7 +313,7 @@ public class FinancialTracker {
             }
         }
         if (transactionsByDate.isEmpty()) {
-            System.out.println("Error: No transaction found!");
+            System.out.println(colors.ANSI_RED + "Error: No transaction found!"+colors.ANSI_RESET);
             return;
 
         }
@@ -332,7 +330,7 @@ public class FinancialTracker {
             }
         }
         if (transactionByVendor.isEmpty()) {
-            System.out.println("Error: No transactions recorded! ");
+            System.out.println(colors.ANSI_RED + "Error: No transactions recorded! "+colors.ANSI_RESET);
             return;
 
         }

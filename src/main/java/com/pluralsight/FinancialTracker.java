@@ -24,18 +24,18 @@ public class FinancialTracker {
 
         while (running) {
             // Used some ASCII to make the intro look somehow fancy
-            System.out.println("""
+            System.out.println( colors.ANSI_GREEN + """
                     ┌─────────────────────────────────────┐
                     │                                     │
                     │      welcome to transaction app     │
                     │                                     │
-                    └─────────────────────────────────────┘""");
+                    └─────────────────────────────────────┘""" + colors.ANSI_RESET);
             //Select an option that can lead you to either one of the available resources
-            System.out.println("Choose an option:");
+            System.out.println(colors.ANSI_GREEN + "Choose an option:");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
-            System.out.println("L) Ledger");
-            System.out.println("X) Exit");
+            System.out.println("L) Ledger" + colors.ANSI_RESET);
+            System.out.println( colors.ANSI_RED+ "X) Exit" + colors.ANSI_RESET);
 
             String input = scanner.nextLine().trim();
 
@@ -82,11 +82,10 @@ public class FinancialTracker {
                 double amount = Double.parseDouble(parts[4]);
                 Transaction transaction = new Transaction(realDate, realTime, description, vendor, amount);
                 transactions.add(transaction);
-                System.out.println(transaction);
                 try {
                     // added the Thread.sleep method so when code is being processed it takes time and it just doesn't bump in
-                    Thread.sleep(1500);
-                    System.out.println(transaction);
+                    Thread.sleep(1200);
+                    System.out.println((transaction.getAmount()>0?colors.ANSI_GREEN:colors.ANSI_RED )+ transaction + colors.ANSI_RESET);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -105,15 +104,15 @@ public class FinancialTracker {
     private static void addDeposit(Scanner scanner) throws IOException {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
-            System.out.println("Please add the date of the deposit (Example: 2023-03-14): ");
+            System.out.println(colors.ANSI_GREEN + "Please add the date of the deposit (Example: 2023-03-14): " + colors.ANSI_RESET);
             String input = scanner.nextLine();
             LocalDate date = LocalDate.parse(input, DATE_FORMATTER);
 
-            System.out.println("Please add  the time of the deposit (Example: 18:24:45): ");
+            System.out.println(colors.ANSI_GREEN + "Please add  the time of the deposit (Example: 18:24:45): " + colors.ANSI_RESET);
             input = scanner.nextLine();
             LocalTime time = LocalTime.parse(input, TIME_FORMATTER);
 
-            System.out.println("Please add description");
+            System.out.println( colors.ANSI_GREEN + "Please add description" + colors.ANSI_RESET);
             String description = scanner.nextLine();
 
             System.out.println("Please enter the name of the vendor: ");
@@ -333,7 +332,7 @@ public class FinancialTracker {
             }
         }
         if (transactionByVendor.isEmpty()) {
-            System.out.println("Error: There's no transactions with the given vendor provided! ");
+            System.out.println("Error: No transactions recorded! ");
             return;
 
         }

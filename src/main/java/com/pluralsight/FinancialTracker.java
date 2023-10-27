@@ -53,7 +53,7 @@ public class FinancialTracker {
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println("Error: Invalid option. Please select the right character.");
                     break;
             }
         }
@@ -61,7 +61,7 @@ public class FinancialTracker {
         scanner.close();
     }
 
-    public static void loadTransactions(String fileName) {
+    public static void loadTransactions(String filzeName) {
         String line;
         try {
             // Used the Buffer reader and saved it as br so i can read files with the given file name
@@ -84,7 +84,7 @@ public class FinancialTracker {
                 transactions.add(transaction);
                 try {
                     // added the Thread.sleep method so when code is being processed it takes time and it just doesn't bump in
-                    Thread.sleep(1);
+                    Thread.sleep(1000);
                     System.out.println((transaction.getAmount() > 0 ? colors.ANSI_GREEN : colors.ANSI_RED) + transaction + colors.ANSI_RESET);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

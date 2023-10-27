@@ -44,7 +44,7 @@ the displayPayments method, all payments will be displayed in green and the rest
 ![img_3.png](img_3.png)
 This is to identify which are the payments and which are not payments. Payments are in green, and deposits are in red.
 
-![Screenshot 2023-10-27 130717.png](..%2F..%2F..%2F..%2FUsers%2FTunka%2FOneDrive%2FPictures%2FScreenshots%2FScreenshot%202023-10-27%20130717.png)
+![payments.png](imgs%2Fpayments.png)
 and this picture shows all the deposits in green instead of being in red, and all payments in red.
 
 ![img_4.png](img_4.png)

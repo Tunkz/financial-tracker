@@ -35,10 +35,21 @@ text colors, positive numbers, and negative numbers.
   
 Creating a colors class so I can color my text the color I want (as well as the background but 
 i didn't add that feature in my code)
+
 ![img_2.png](img_2.png)
 What this does, is that when the displayDeposits gets print out, if the transaction amount is 
   . > 0 all the payments will be displayed in green color and the rest will print in red. So as 
 the displayPayments method, all payments will be displayed in green and the rest will be colored in red.
+
+![img_3.png](img_3.png)
+This is to identify which are the payments and which are not payments. Payments are in green, and deposits are in red.
+
+![Screenshot 2023-10-27 130717.png](..%2F..%2F..%2F..%2FUsers%2FTunka%2FOneDrive%2FPictures%2FScreenshots%2FScreenshot%202023-10-27%20130717.png)
+and this picture shows all the deposits in green instead of being in red, and all payments in red.
+
+![img_4.png](img_4.png)
+This is the part of the code that allowed me to change the colors in each of the methods for deposit and payment.
+
 <h2 style="text-align: center;"> Appreciation </h2></u>
 I'd like to thank my program manager, **Gabe**, **Hamza**,**Christian**,**BigBroJoshua**, and the rest of the class
 to be there when needed, for the help when it came to debugging, for the resources provided to make sure my work 

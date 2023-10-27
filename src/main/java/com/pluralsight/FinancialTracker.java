@@ -234,6 +234,8 @@ public class FinancialTracker {
 
         for (Transaction transaction : transactions) {
             System.out.println((transaction.getAmount() > 0 ? colors.ANSI_GREEN : colors.ANSI_RED) + transaction + colors.ANSI_RESET);
+
+
         }
     }
 

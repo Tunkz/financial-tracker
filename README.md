@@ -36,4 +36,9 @@ i didn't add that feature in my code)
 What this does, is that when the displayDeposits gets print out, if the transaction amount is 
   . > 0 all the payments will be displayed in green color and the rest will print in red. So as 
 the displayPayments method, all payments will be displayed in green and the rest will be colored in red.
+<h2 style="text-align: center;"> Appreciation </h2></u>
+I'd like to thank my program manager, **Gabe**, **Hamza**,**Christian**,**BigBroJoshua**, and the rest of the class
+to be there when needed, for the help when it came to debugging, for the resources provided to make sure my work 
+was done, and for last but not least, **Raymond**. For being such a very patient instructor, although we ask a lot of 
+repetitive questions, but you always got us out of doubts when we were almost completely out of the game.
 

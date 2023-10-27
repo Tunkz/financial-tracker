@@ -25,9 +25,12 @@ A special feature that i added and would like to highlight, will be the **ANSI_R
 It makes the color of your text unique and easy to identify if it's something positive or negative
 Green = positive, Red = negative. (this apply to most cases, but not every case)
 <h2 style="text-align: center;"> Screenshots & Gif's </h2></u>
+
 ![Animation.gif](./imgs/Animation.gif)
+
 This shows the code at a speed i wanted it to run, so i can highlight the difference between the 
 text colors, positive numbers, and negative numbers.
+
 ![img_1.png](img_1.png)
   
 Creating a colors class so I can color my text the color I want (as well as the background but 
